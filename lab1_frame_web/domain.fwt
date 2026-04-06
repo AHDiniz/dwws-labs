@@ -1,0 +1,34 @@
+@domain
+Package Domain {
+    Class Guest {
+        @id
+        _id: Long {generation=auto},
+        name: String,
+        email: String,
+        password: String,
+        birthDate: Date {precision=date},
+    }
+    Class Room {
+        @id
+        _id: Long {generation=auto},
+        number: int,
+    }
+    Class Bed {
+        @id
+        _id: Long {generation=auto},
+        number: int,
+        pricePerNight: Double,
+    }
+    Class Booking {
+        @id
+        _id: Long {generation=auto},
+        startDate: date {precision=date},
+        endDate: date {precision=date},
+    }
+
+    Association {
+        Bed [1..*] -> [1] Room
+        Booking [*] -> [1] Guest
+        Booking [*] -> [1..*] Bed
+    }
+}
