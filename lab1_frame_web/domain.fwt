@@ -27,8 +27,60 @@ Package Domain {
     }
 
     Association {
-        Bed [1..*] -> [1] Room
+        Bed [1..*] -- [1] Room
         Booking [*] -> [1] Guest
         Booking [*] -> [1..*] Bed
+    }
+}
+
+@controller
+Package Control {
+    Class RegistrationController {
+        guest: Guest,
+        age: int,
+
+        register(): String,
+    }
+
+    Dependency {
+        RegistrationController -> Success
+        RegistrationController -> Underage
+    }
+}
+
+@view
+Package Registration {
+    @page
+    Class Index {
+
+    }
+
+    @form
+    Class RegForm {
+        guest__name: inputText,
+        guest__birthDate: inputText,
+        guest__email: inputText,
+        guest__password: inputSecret,
+
+        register: commandButton,
+    }
+
+    @page
+    Class Success {
+        guest__name: outputText,
+    }
+
+    @page
+    Class Underage {
+        guest__name: outputText,
+        age: outputText,
+    }
+
+    Composition {
+        Index -> RegForm
+    }
+
+    Dependency {
+        RegForm -> RegistrationController
     }
 }
