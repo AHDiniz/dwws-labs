@@ -46,6 +46,10 @@ Package Control {
         RegistrationController -> Success
         RegistrationController -> Underage
     }
+
+    Association {
+        RegistrationController -> RegistrationService
+    }
 }
 
 @view
@@ -82,5 +86,21 @@ Package Registration {
 
     Dependency {
         RegForm -> RegistrationController
+    }
+}
+
+@service
+Package Application {
+    Class RegistrationService {
+
+    }
+
+    Class RegistrationServiceBean {
+        register(): String,
+        calculateAge(): int,
+    }
+
+    Inheritance {
+        RegistrationServiceBean extends RegistrationService
     }
 }
