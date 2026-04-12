@@ -55,9 +55,7 @@ Package Control {
 @view
 Package Registration {
     @page
-    Class Index {
-
-    }
+    Class Index {}
 
     @form
     Class RegForm {
@@ -91,16 +89,53 @@ Package Registration {
 
 @service
 Package Application {
-    Class RegistrationService {
-
-    }
+    Class RegistrationService {}
 
     Class RegistrationServiceBean {
         register(): String,
         calculateAge(): int,
     }
 
+    Class LoginService {}
+
+    Class LoginServiceBean {
+        login(): Guest,
+    }
+
+    Class SearchService {}
+
+    Class SearchServiceBean {
+        search(): List,
+    }
+
+    Dependency {
+        LoginService -> GuestDAO
+        SearchService -> BedDAO
+    }
+
     Inheritance {
         RegistrationServiceBean extends RegistrationService
+        LoginServiceBean extends LoginService
+        SearchServiceBean extends SearchService
+    }
+}
+
+@persistence
+Package Persistence {
+    Class GuestDAO {
+        get_by_email(): Guest,
+    }
+
+    Class GuestJPADAO{}
+
+    Class BedDAO {
+        list_by_date(start_date, end_date): List,
+    }
+
+    Class BedJPADAO {}
+
+    Inheritance {
+        GuestJPADAO extends GuestDAO
+        BedJPADAO extends BedDAO
     }
 }
