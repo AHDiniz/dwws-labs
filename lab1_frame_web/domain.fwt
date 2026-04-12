@@ -1,5 +1,7 @@
 @domain
 Package Domain {
+
+    @persistent
     Class Guest {
         @id
         _id: Long {generation=auto},
@@ -8,17 +10,23 @@ Package Domain {
         password: String,
         birthDate: Date {precision=date},
     }
+
+    @persistent
     Class Room {
         @id
         _id: Long {generation=auto},
         number: int,
     }
+
+    @persistent
     Class Bed {
         @id
         _id: Long {generation=auto},
         number: int,
         pricePerNight: Double,
     }
+
+    @persistent
     Class Booking {
         @id
         _id: Long {generation=auto},
